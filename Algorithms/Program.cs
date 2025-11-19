@@ -12,6 +12,7 @@ namespace Algorithms
             int choice = Convert.ToInt32(Console.ReadLine());
 
             if (Convert.ToInt32(Console.ReadLine()) == 1)
+            if (choice == 1)
             {
                 // Parametri iniziali (es. per una semplice funzione quadratica)
                 double[] parameters = { 3.0, -2.0 };
@@ -43,6 +44,7 @@ namespace Algorithms
                     string.Join(", ", parameters.Select(p => p.ToString("F4"))) + "]");
             }
             else if (Convert.ToInt32(Console.ReadLine()) == 2)
+            else if (choice == 2)
             {
 
             }
