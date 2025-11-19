@@ -8,10 +8,9 @@ namespace Algorithms
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Quale algortimo vogliamo usare?\n1)Adam\n2)GA");
+            Console.WriteLine("Quale algortimo vogliamo usare?\n1)Adam\n2)GA\n3)NN");
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            if (Convert.ToInt32(Console.ReadLine()) == 1)
             if (choice == 1)
             {
                 // Parametri iniziali (es. per una semplice funzione quadratica)
@@ -43,12 +42,46 @@ namespace Algorithms
                 Console.WriteLine("Parametri finali: [" +
                     string.Join(", ", parameters.Select(p => p.ToString("F4"))) + "]");
             }
-            else if (Convert.ToInt32(Console.ReadLine()) == 2)
             else if (choice == 2)
             {
 
             }
-            
+            else if (choice == 3)
+            {
+                // Configurazione rete: 2 input, 2 hidden, 1 output
+                NN net = new NN(new[] { 2, 2, 1 });
+
+                // Dati di addestramento (XOR)
+                float[][] inputs = new[] {
+                    new[] {0f, 0f},
+                    new[] {0f, 1f},
+                    new[] {1f, 0f},
+                    new[] {1f, 1f}
+                };
+
+                float[][] targets = new[] {
+                    new[] {0f},
+                    new[] {1f},
+                    new[] {1f},
+                    new[] {0f}
+                 };
+
+                // Addestramento
+                for (int epoch = 0; epoch < 10000; epoch++)
+                {
+                    for (int i = 0; i < inputs.Length; i++)
+                    {
+                        net.Train(inputs[i], targets[i]);
+                    }
+                }
+
+                // Test
+                foreach (var input in inputs)
+                {
+                    var output = net.FeedForward(input);
+                    Console.WriteLine($"{input[0]}, {input[1]} -> {output[0]:F4}");
+                }
+            }
         }
     }
 }
